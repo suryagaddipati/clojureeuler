@@ -1,4 +1,3 @@
-(ns euler-002)
 (defn fibn [x] 
   (if (< x 2 ) 
        x 
@@ -6,8 +5,8 @@
  
 
 
-( apply + (filter even?  
-            ( map fibn    
-              (take-while #(> 4000000   (fibn % ) )  (iterate inc 0)) ) ))
+(defn fib-seq [x] 
+  (lazy-seq  (cons (fibn x)  (fib-seq  ( inc x)) ) ) )
 
+ (apply + (filter even?  (take-while #(> 4000000 %) (fib-seq 0))))
 
